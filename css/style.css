@@ -301,6 +301,9 @@ body {
 .input:focus {
   border: 1px solid #ff4500;
 }
+.input::placeholder {
+  opacity: 0.7;
+}
 
 .search {
   display: flex;

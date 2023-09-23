@@ -5,6 +5,7 @@ const genresContainer = document.querySelector(".content__list");
 let moviesData = null; //  Переменная для записи данных о топ-100 фильмах
 const genresBtns = document.querySelectorAll(".content__link");
 let activeGenre = "";
+const inputField = document.querySelector(".content__input");
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -63,8 +64,6 @@ const displayMovies = async function (moviesData, genre = "") {
   }
 };
 
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
 const getMovies = async function () {
   try {
     const response = await fetch(
@@ -82,6 +81,7 @@ const getMovies = async function () {
     console.log(`Что-то пошло не так: ${e}`);
   }
 };
+
 const gettingAllGenres = function (moviesData) {
   let allGeners = []; // Массив для жанров
   moviesData.map((elem) => allGeners.push(...Object.values(...elem.genres))); // Итерирую все фильмы и получаю их жанры
@@ -92,20 +92,21 @@ const gettingAllGenres = function (moviesData) {
 const removeActiveClass = function (list) {
   list.forEach((elem) => elem.classList.remove("active"));
 };
+const clearMovieContainer = () => {
+  moviesContainer.innerHTML = "";
+};
 
-const writingDataToVaribale = async function () {
-  try {
-    moviesData = await getMovies(); // получаню данные из асинхронной функции и заисываю в переменную
-    gettingAllGenres(moviesData);
-    displayMovies(moviesData); // Отрисовываю все фильмы на странице
-  } catch (e) {
-    console.log(`${e}(((`);
-  }
+// Function for DRY code
+const resetMovieContainer = (movieData) => {
+  clearMovieContainer();
+  displayMovies(movieData);
 };
 
 const programStart = async function () {
   try {
-    await writingDataToVaribale();
+    moviesData = await getMovies(); // получаню данные из асинхронной функции и заисываю в переменную
+    gettingAllGenres(moviesData);
+    displayMovies(moviesData); // Отрисовываю все фильмы на странице
     document
       .querySelector(".content__filters")
       .addEventListener("click", (e) => {
@@ -113,33 +114,32 @@ const programStart = async function () {
           removeActiveClass(document.querySelectorAll(".content__link"));
           e.target.classList.add("active");
           activeGenre = e.target.textContent;
-          Object.values(moviesData[0].genres).map((elem) =>
-            console.log(...Object.values(elem))
-          );
-          let sortedByGenreData = moviesData[0].genres.filter(
-            (elem) => elem.name.toLowerCase() === activeGenre.toLowerCase()
-          );
-          console.log(sortedByGenreData);
+          let filteredMoviesData = [];
+          moviesData.map((movie) => {
+            movie.genres.find((genre) => {
+              if (genre.name === activeGenre.toLowerCase())
+                filteredMoviesData.push(movie);
+            });
+          });
+
+          resetMovieContainer(filteredMoviesData);
         }
       });
+    inputField.addEventListener("keyup", () => {
+      removeActiveClass(document.querySelectorAll(".content__link"));
+      const filteredData = moviesData.filter((movie) => {
+        return (
+          movie.name.toLowerCase().indexOf(inputField.value.toLowerCase()) !==
+          -1
+        );
+      });
+
+      resetMovieContainer(filteredData);
+    });
   } catch (e) {
     console.error(`${e}!!!`);
   }
 };
 
 //Запуск скрипта
-// programStart();
-
-// ! TEST
-// итерировать все элементы массива и проверить есть ли у объекта в свойстве жанры объект со значением выделенного жанра
-
-const arr = [
-  { genres: [{ name: "c" }, { name: "d" }, { name: "h" }] },
-  { genres: [{ name: "h" }, { name: "d" }] },
-  { genres: [{ name: "d" }, { name: "c" }, { name: "h" }] },
-  { genres: [{ name: "h" }, { name: "c" }] },
-];
-
-const newArr = [];
-
-console.log(newArr);
+programStart();

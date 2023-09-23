@@ -8,4 +8,7 @@
   &:focus {
     border: 1px solid #ff4500;
   }
+  &::placeholder {
+    opacity: 0.7;
+  }
 }
