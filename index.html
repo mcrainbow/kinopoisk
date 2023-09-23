@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css  " />
+    <title>Kinopoisk API</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header__container">
+        <a href="#" class="logo header__logo">КИНОПОИСК</a>
+        <nav class="navigation header__navigation">
+          <ul class="header__list">
+            <li class="header__item">
+              <a href="#" class="header__link">Онлайн кинотеатр</a>
+            </li>
+            <li class="header__item">
+              <a href="#" class="header__link">Загрузки</a>
+            </li>
+            <li class="header__item">
+              <a href="#" class="header__link">Новости</a>
+            </li>
+          </ul>
+        </nav>
+        <a href="" class="user hedaer__user">
+          <img
+            src="./assets/images/avatar1.jpg"
+            alt="Avatar"
+            class="user__image"
+          />
+        </a>
+      </div>
+    </header>
+    <main class="main">
+      <section class="content">
+        <div class="container content__container">
+          <div class="content__sidebar">
+            <nav class="content__filters">
+              <ul class="content__list"></ul>
+            </nav>
+          </div>
+          <div class="content__films">
+            <div class="search content__search">
+              <input type="text" class="input content__input" />
+              <svg
+                width="30px"
+                height="30px"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z"
+                  stroke="#ff4500"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div class="content__films-list"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <p>
+        Copyright ©
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        mcrainbow
+      </p>
+      <a href="https://github.com/mcrainbow" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </footer>
+    <script
+      src="https://kit.fontawesome.com/2cffbe9dc3.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

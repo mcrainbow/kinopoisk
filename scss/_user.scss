@@ -1,0 +1,17 @@
+.user {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+  border: 2px solid white;
+  transition: all linear 0.3s;
+  &:hover { 
+    border-color: orangered;
+  }
+  &__image {
+    width: 100%;
+    height: 100%;
+  }
+}
